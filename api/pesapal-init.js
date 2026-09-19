@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         url: `${process.env.DERYCARE_API_URL || "https://derycare.vercel.app"}/api/pesapal-ipn`,
         ipn_notification_type: "POST"
-      })
+      }), signal: AbortSignal.timeout(20000)
     });
     const ipn = await ipnRes.json().catch(() => ({}));
     if (!ipn.ipn_id) throw new Error(ipn.error?.message || "IPN registration failed");
@@ -39,7 +39,8 @@ export default async function handler(req, res) {
         last_name: (order.customer_name || "Customer").split(" ").slice(1).join(" ") || "-",
         email_address: order.email || "orders@derycode.online",
         phone_number: order.phone || undefined,
-        billing_address: { address_1: order.address || "Uganda", city: order.zone || "Kampala", country: "UG", first_name: order.customer_name || "Customer" }
+        billing_address: { address_1: order.address || "Uganda", city: order.zone || "Kampala", country: "UG", first_name: order.customer_name || "Customer" },
+        signal: AbortSignal.timeout(20000)
       })
     });
     const pay = await submitRes.json().catch(() => ({}));
