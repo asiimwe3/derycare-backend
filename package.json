@@ -1,0 +1,6 @@
+{
+  "name": "derycare-backend",
+  "version": "1.0.0",
+  "description": "DeryCare API: health check + Pesapal payment initiation, status and IPN. Powered by DeryCode technology.",
+  "private": true
+}
