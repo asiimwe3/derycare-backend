@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   try {
     const { order_no, return_url } = typeof req.body === "object" && req.body ? req.body : JSON.parse(req.body || "{}");
     if (!order_no) return res.status(400).json({ error: "order_no required" });
-    const rows = await sbSelect("orders", { "order_no": `eq.${order_no}` });
+    const rows = await sbSelect("derycare_orders", { "order_no": `eq.${order_no}` });
     const order = rows && rows[0];
     if (!order) return res.status(404).json({ error: "order not found" });
     if (!process.env.PESAPAL_CONSUMER_KEY) return res.status(503).json({ error: "payment gateway not configured" });
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     if (!pay.redirect_url) throw new Error(pay.error?.message || "Pesapal order submission failed");
 
     try {
-      await sbUpdate("orders", { "order_no": `eq.${order_no}` },
+      await sbUpdate("derycare_orders", { "order_no": `eq.${order_no}` },
         { status: "awaiting_payment", payment_ref: pay.order_tracking_id || null });
     } catch (e) { console.warn("could not persist payment ref:", e.message); }
 

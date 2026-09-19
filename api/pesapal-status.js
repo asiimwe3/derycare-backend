@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const t = await pesapalStatus(token, orderTrackingId);
     const status = statusMap[t.payment_status_description] || "pending_payment";
     try {
-      await sbUpdate("orders", { "order_no": `eq.${order_no}` }, { status, payment_method: t.payment_method || "pesapal" });
+      await sbUpdate("derycare_orders", { "order_no": `eq.${order_no}` }, { status, payment_method: t.payment_method || "pesapal" });
     } catch (e) { console.warn("status update failed:", e.message); }
     res.status(200).json({ status, description: t.payment_status_description || null });
   } catch (e) {

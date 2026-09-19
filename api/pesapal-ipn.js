@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       const token = await pesapalToken();
       const t = await pesapalStatus(token, tracking);
       const status = statusMap[t.payment_status_description] || "pending_payment";
-      try { await sbUpdate("orders", { "order_no": `eq.${ref}` }, { status, payment_ref: tracking }); } catch (e) {}
+      try { await sbUpdate("derycare_orders", { "order_no": `eq.${ref}` }, { status, payment_ref: tracking }); } catch (e) {}
     }
   } catch (e) { console.warn("ipn handling:", e.message); }
   /* Pesapal expects a plain 200 acknowledgement */

@@ -1,5 +1,5 @@
 /* Shared helpers: Supabase (service role) + Pesapal */
-export const SUPABASE_URL = process.env.SUPABASE_URL || "https://upjmzobjnpeldiubuopk.supabase.co";
+export const SUPABASE_URL = process.env.SUPABASE_URL || "https://emldbjqegftrngxypeca.supabase.co";
 export const SB = process.env.SUPABASE_SERVICE_ROLE;
 export const PESAPAL_BASE = (process.env.PESAPAL_ENV || "demo").toLowerCase() === "production"
   ? "https://pay.pesapal.com" : "https://cybqa.pesapal.com";
