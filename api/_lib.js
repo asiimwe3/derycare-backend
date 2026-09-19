@@ -3,7 +3,7 @@ export const SUPABASE_URL = process.env.SUPABASE_URL || "https://emldbjqegftrngx
 export const SB = process.env.SUPABASE_SERVICE_ROLE;
 const env = (process.env.PESAPAL_ENV || "demo").toLowerCase();
 export const PESAPAL_BASE = (env === "live" || env === "production")
-  ? "https://pay.pesapal.com" : "https://cybqa.pesapal.com";
+  ? "https://pay.pesapal.com/v3" : "https://cybqa.pesapal.com/pesapalv3";
 const FT = { signal: AbortSignal.timeout(20000) };
 
 export async function sbSelect(table, filters) {
